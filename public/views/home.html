@@ -6,30 +6,30 @@
   <button type="submit" ng-click="update(email)" class="btn btn-primary">Search</button>
 </form>
 
+<div class="result" ng-show="resultsQueried">
 
-
-<div class="contactInfo">
-	<div class="well"><h3>{{result.contactInfo.fullName}}<h3></div>
-</div>
-
-<div class="progress">
-  <div class="progress-bar progress-bar-striped" 
-  		ng-class= "{'progress-bar-info': isInfo(), 'progress-bar-success': isSuccess(), 'progress-bar-warning': isWarn(), 'progress-bar-danger': isDanger()}"
-  		role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{likelihood*100}}%">
-    <span ng-model="likelihood">{{result.likelihood | percent}}</span>
+  <div class="contactInfo">
+  	<div class="well"><h3>{{result.contactInfo.fullName}}<h3></div>
   </div>
+
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped" 
+    		ng-class="{'progress-bar-info': isInfo(), 'progress-bar-success': isSuccess(), 'progress-bar-warning': isWarn(), 'progress-bar-danger': isDanger()}"
+    		role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{likelihood*100}}%">
+      <span ng-model="likelihood">{{result.likelihood | percent}}</span>
+    </div>
+  </div>
+
+
+  <div class="socialProfiles">
+  </div>
+
+
+
+  <div>		
+    <a href="#" ng:repeat="photo in photos"><img src="{{photo.url}}" class="img-thumbnail" style="height: 120px;"/></a></li>
+  </div>
+
 </div>
-
-
-<div class="socialProfiles">
-</div>
-
-
-
-<div>		
-	<a href="#" ng:repeat="photo in photos"><img src="{{photo.url}}" class="img-thumbnail" style="height: 120px;"/></a></li>
-</div>
-
-
 
 

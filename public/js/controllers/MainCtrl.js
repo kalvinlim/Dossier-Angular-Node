@@ -6,6 +6,7 @@ angular.module('MainCtrl', ['percentFilter']).controller('MainController', funct
 	
 	$scope.email;
 	$scope.likelihood ;
+	$scope.resultsQueried = false;
 
 	$scope.isInfo = function(){
 		return $scope.likelihood <= 0.25;
@@ -28,6 +29,7 @@ angular.module('MainCtrl', ['percentFilter']).controller('MainController', funct
 			console.log(data);
 			$scope.likelihood = data.likelihood;
 			$scope.photos = data.photos;
+			$scope.resultsQueried = true;
 		});
         //$scope.email = angular.copy(email);
      };
