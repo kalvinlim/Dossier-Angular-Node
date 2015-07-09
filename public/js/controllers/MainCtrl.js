@@ -1,4 +1,4 @@
-angular.module('MainCtrl', []).controller('MainController', function($scope, $resource) {
+angular.module('MainCtrl', ['percentFilter']).controller('MainController', function($scope, $resource) {
 	var apiKey = "";
 	//var entry = $resource('https://api.fullcontact.com/v2/person.json?email=:email&apiKey=' + apiKey);
 	var entry = $resource('/mock/rest');
@@ -26,16 +26,10 @@ angular.module('MainCtrl', []).controller('MainController', function($scope, $re
 	$scope.update = function(email) {
 		$scope.result = entry.get({ email: $scope.email }, function(data){
 			console.log(data);
-			console.log(data.likelihood);
 			$scope.likelihood = data.likelihood;
 			$scope.photos = data.photos;
-
 		});
-		//$scope.likelihood = 0.93;
         //$scope.email = angular.copy(email);
- 	
-
-       
      };
 	
 	$scope.foo = function(){
