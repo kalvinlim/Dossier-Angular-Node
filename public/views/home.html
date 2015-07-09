@@ -1,0 +1,20 @@
+<div class="progress">
+  <div class="progress-bar progress-bar-striped" 
+  		ng-class= "{'progress-bar-info': isInfo(), 'progress-bar-success': isSuccess(), 'progress-bar-warning': isWarn(), 'progress-bar-danger': isDanger()}"
+  		role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{likelihood*100}}%">
+    <span ng-model="likelihood">{{likelihood}}</span>
+  </div>
+</div>
+
+
+
+<div>		
+	<a href="#" ng:repeat="photo in photos"><img src="{{photo.url}}" class="img-thumbnail" style="height: 120px;"/></a></li>
+</div>
+
+
+
+<form novalidate class="simple-form">
+    E-mail: <input type="email" ng-model="email" /><br />
+    <input type="submit" ng-click="update(email)" value="Search" />
+</form>

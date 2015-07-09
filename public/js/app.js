@@ -1,0 +1,1 @@
+angular.module('sampleApp', ['ngRoute', 'appRoutes', 'ngResource', 'ui.bootstrap', 'bootstrapLightbox', 'MainCtrl', 'EntryService']);
