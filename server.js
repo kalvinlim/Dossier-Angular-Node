@@ -24,7 +24,6 @@ app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-f
 app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 
-
 app.get('/mock/api/v1/person.json', function(req, res, next){
 	fs.readFile('server/yong.json', 'utf8', function (err,data) {
 		if (err) {
@@ -35,27 +34,19 @@ app.get('/mock/api/v1/person.json', function(req, res, next){
 
 });
 
-
 app.get('/api/v1/person.json', function(req, res, next){
-	//var apiKey = 'b2e3cac36eaead4e';
+
 	var email = req.query.email;
 	var url = 'https://api.fullcontact.com/v2/person.json?email='+email+'&apiKey=' + apiKey.keyValue;
 	
-	console.log(apiKey.keyValue);
-	
 	request(url, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-	    //console.log(body) // Print the body of response.
-	    res.json(JSON.parse(body));  	
-	}
+	    	res.json(JSON.parse(body));  	
+		}
 
-})
+	})
 });
 
-/*app.get(function(req, res, next){
-	console.log("wat");
-	next();
-});*/
 
 // routes ==================================================
 require('./app/routes')(app); // pass our application into our routes
