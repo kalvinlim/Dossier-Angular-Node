@@ -5,11 +5,13 @@ var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var fs 			   = require('fs');		
+var request 	   = require('request');
 
 // configuration ===========================================
-	
+
 // config files
 var db = require('./config/db');
+var apiKey = require('./config/apiKey');
 
 var port = process.env.PORT || 8080; // set our port
 // mongoose.connect(db.url); // connect to our mongoDB database (commented out after you enter in your own credentials)
@@ -23,18 +25,31 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 
 
-app.get('/mock/rest', function(req, res, next){
-	fs.readFile('server/mock-person-api.json', 'utf8', function (err,data) {
-  		if (err) {
-    		return console.log(err);
-  		}
-  		console.log(data);
-  		res.json(JSON.parse(data));
-  			//res.json({user : 'tobi'});
-		console.log("mock/rest")
-		next();
+app.get('/mock/api/v1/person.json', function(req, res, next){
+	fs.readFile('server/yong.json', 'utf8', function (err,data) {
+		if (err) {
+			return console.log(err);
+		}
+		res.json(JSON.parse(data));  	
 	});
 
+});
+
+
+app.get('/api/v1/person.json', function(req, res, next){
+	//var apiKey = 'b2e3cac36eaead4e';
+	var email = req.query.email;
+	var url = 'https://api.fullcontact.com/v2/person.json?email='+email+'&apiKey=' + apiKey.keyValue;
+	
+	console.log(apiKey.keyValue);
+	
+	request(url, function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+	    //console.log(body) // Print the body of response.
+	    res.json(JSON.parse(body));  	
+	}
+
+})
 });
 
 /*app.get(function(req, res, next){

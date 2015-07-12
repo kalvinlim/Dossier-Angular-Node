@@ -1,12 +1,13 @@
-angular.module('MainCtrl', ['percentFilter']).controller('MainController', function($scope, $resource) {
-	var apiKey = "";
-	//var entry = $resource('https://api.fullcontact.com/v2/person.json?email=:email&apiKey=' + apiKey);
-	var entry = $resource('/mock/rest');
-
+angular.module('MainCtrl', ['percentFilter', 'endDateFilter']).controller('MainController', function($scope, $resource, $sce) {
+	
+	//var entry = $resource('/mock/api/v1/person.json');
+	var entry = $resource('/api/v1/person.json?email=:email');
 	
 	$scope.email;
 	$scope.likelihood ;
 	$scope.resultsQueried = false;
+	$scope.mapsApiKey = 'AIzaSyAtwVSPdFvVErwpn25y2JjvNOVYsjvaK7Q';
+	$scope.mapsUrl = 'https://www.google.com/maps/embed/v1/search?key='+$scope.mapsApiKey+'&q=';
 
 	$scope.isInfo = function(){
 		return $scope.likelihood <= 0.25;
@@ -29,7 +30,8 @@ angular.module('MainCtrl', ['percentFilter']).controller('MainController', funct
 			console.log(data);
 			$scope.likelihood = data.likelihood;
 			$scope.photos = data.photos;
-			$scope.resultsQueried = true;
+			$scope.resultsQueried = true;			
+			
 		});
         //$scope.email = angular.copy(email);
      };
@@ -40,5 +42,15 @@ angular.module('MainCtrl', ['percentFilter']).controller('MainController', funct
 		//var entry = Entry.get({ email: $scope.email }, function() {
     //	console.log(entry);
   	//}); // get() returns a single entry
- 
+
+	$scope.getMapsUrl = function(){
+		var location = $scope.result.demographics.locationDeduced.deducedLocation.replace(/\s+/g, '').split(',').join('+'); //Strip whitespace, then replace commas with '+'
+		$scope.mapsUrl = 'https://www.google.com/maps/embed/v1/search?key='+$scope.mapsApiKey+'&q=' + location;		
+		return $scope.trustSrc($scope.mapsUrl);
+	}
+
+	$scope.trustSrc = function(src) {
+    	return $sce.trustAsResourceUrl(src);
+  	}
+    	
 });
