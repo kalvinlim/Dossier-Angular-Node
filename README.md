@@ -2,7 +2,7 @@
 Dossier Auditor written using the MEAN stack 
 
 ### Overview
-Self auditing tool to datamine the web for information based on email search.  This is an exercise in angular/node.js as well as RESTFUL api design and consumption
+Self auditing tool to datamine the web for information based on email search.  This is an exercise in angular/node.js as well as RESTful api design and consumption
 
 ### Dependencies:
 
