@@ -1,13 +1,21 @@
-angular.module('MainCtrl', ['percentFilter', 'endDateFilter']).controller('MainController', function($scope, $resource, $sce) {
+angular.module('MainCtrl', ['percentFilter', 'endDateFilter', ]).controller('MainController', function($scope, $resource, $sce, $routeParams) {
 	
 	//var entry = $resource('/mock/api/v1/person.json');
 	var entry = $resource('/api/v1/person.json?email=:email');
 	
-	$scope.email;
+	$scope.email = $routeParams.email;
 	$scope.likelihood ;
 	$scope.resultsQueried = false;
 	$scope.mapsApiKey = 'AIzaSyAtwVSPdFvVErwpn25y2JjvNOVYsjvaK7Q';
 	$scope.mapsUrl = 'https://www.google.com/maps/embed/v1/search?key='+$scope.mapsApiKey+'&q=';
+ 	
+
+ 	
+ 	if($scope.email){
+ 		console.log("Lookingup: ", $scope.email);
+ 		$scope.update($scope.email);
+ 		console.log($scope.resultsQueried);
+ 	}
 
 	$scope.isInfo = function(){
 		return $scope.likelihood <= 0.25;
@@ -26,12 +34,14 @@ angular.module('MainCtrl', ['percentFilter', 'endDateFilter']).controller('MainC
 	
 
 	$scope.update = function(email) {
-		$scope.result = entry.get({ email: $scope.email }, function(data){
+		console.log("Lookingup 2: ", email);
+		console.log(email);
+		$scope.result = entry.get({ email: email }, function(data){
 			console.log(data);
 			$scope.likelihood = data.likelihood;
 			$scope.photos = data.photos;
 			$scope.resultsQueried = true;			
-			
+			console.log($scope.resultsQueried);
 		});
         //$scope.email = angular.copy(email);
      };

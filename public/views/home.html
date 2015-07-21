@@ -7,9 +7,9 @@
 </form>
 
 
-<div class="result" ng-show="resultsQueried">
+<div class="result" >
 
-	<div class="contactInfo">
+	<div class="contactInfo" ng-if="result.contactInfo">
 		<div class="well">
 			<h3>{{result.contactInfo.fullName}}</h3>
 			<p ng-if="result.demographics.gender">Gender deduced as: {{result.demographics.gender}}</p>
@@ -19,51 +19,50 @@
 		</div>
 	</div>
 
-	<div class="progress">
+	<div class="progress" ng-if="result.likelihood">
 		<div class="progress-bar progress-bar-striped" 
 		ng-class="{'progress-bar-info': isInfo(), 'progress-bar-success': isSuccess(), 'progress-bar-warning': isWarn(), 'progress-bar-danger': isDanger()}"
 		role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{likelihood*100}}%">
 		<span ng-model="likelihood">{{result.likelihood | percent}}</span>
+		</div>
 	</div>
-</div>
 
-<div class="panel panel-default" ng-if="photos">
-	<div class="panel-heading">
-		<h3 class="panel-title">Photos</h3>
-	</div>
-	<div class="panel-body">
-		<a href="#" ng:repeat="photo in photos"><img src="{{photo.url}}" class="img-thumbnail" style="height: 120px;"/></a>
-	</div>
-</div>
-
-
-<div class="panel panel-default" ng-if="resultsQueried && result.demographics.locationDeduced.deducedLocation">
-	<div class="panel-heading">
-		<h3 class="panel-title">Deduced Location</h3>
-	</div>
-	<div class="panel-body">
-		<iframe width="600" height="450" frameborder="0" style="border:0" ng-src="{{getMapsUrl()}}" allowfullscreen></iframe>
-	</div>
-</div>
-
-
-
-
-<div class="socialProfiles">
-	<div class="panel panel-default"  ng-repeat="profile in result.socialProfiles">
+	<div class="panel panel-default" ng-if="photos">
 		<div class="panel-heading">
-			<h3 class="panel-title">{{profile.typeName}}</h3>
+			<h3 class="panel-title">Photos</h3>
 		</div>
 		<div class="panel-body">
-			{{profile.url}}
+			<a href="#" ng:repeat="photo in photos"><img src="{{photo.url}}" class="img-thumbnail" style="height: 120px;"/></a>
 		</div>
 	</div>
-	
+
+
+	<div class="panel panel-default" ng-if="resultsQueried && result.demographics.locationDeduced.deducedLocation">
+		<div class="panel-heading">
+			<h3 class="panel-title">Deduced Location</h3>
+		</div>
+		<div class="panel-body">
+			<iframe width="600" height="450" frameborder="0" style="border:0" ng-src="{{getMapsUrl()}}" allowfullscreen></iframe>
+		</div>
+	</div>
+
+
+
+
+	<div class="socialProfiles">
+		<div class="panel panel-default"  ng-repeat="profile in result.socialProfiles">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{profile.typeName}}</h3>
+			</div>
+			<div class="panel-body">
+				{{profile.url}}
+			</div>
+		</div>
+		
+	</div>
+
+
 </div>
-
-
-
-
 
 
 

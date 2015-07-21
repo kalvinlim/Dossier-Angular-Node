@@ -3,7 +3,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 	$routeProvider
 
 		// home page
-		.when('/', {
+		.when('/:email?', {
 			templateUrl: 'views/home.html',
 			controller: 'MainController'
 		})
