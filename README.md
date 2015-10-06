@@ -6,8 +6,8 @@ Self auditing tool to datamine the web for information based on email search.  T
 
 ### Demo
 
-* [[Example search result]](http://ec2-54-148-63-132.us-west-2.compute.amazonaws.com:8080/zuck@facebook.com)
-* [[Default page view]](http://ec2-54-148-63-132.us-west-2.compute.amazonaws.com:8080/)
+* [[Example search result]](http://ec2-52-88-245-162.us-west-2.compute.amazonaws.com:8080/zuck@facebook.com)
+* [[Default page view]](http://ec2-52-88-245-162.us-west-2.compute.amazonaws.com:8080/)
 
 ### Dependencies:
 
